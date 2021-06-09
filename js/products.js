@@ -16,14 +16,15 @@ const app= createApp({
       },
       pagination: {}, //頁數
       isNew: false,  // 新增還是update
-   //   apiUrl: 'https://vue3-course-api.hexschool.io/api',  //api 網址
-   //   apiPath: 'hungmarty-api',
+      
     }
   },
   //生命週期
   mounted() {
-    const token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-
+   // 取出 Token
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+    console.log(token);
+     
     if (token === '') {
       alert('您尚未登入請重新登入。');
       window.location = 'index.html';
@@ -37,8 +38,8 @@ const app= createApp({
   methods: {
      //取得資料
     getData(page = 1) {
-      const url = `${apiUrl}/api/${apiPath}/admin/products?page=${page}`;
-
+     const url = `${apiUrl}/api/${apiPath}/admin/products?page=${page}`;
+     
       axios.get(url)
         .then((res) => {
           if (res.data.success) {
